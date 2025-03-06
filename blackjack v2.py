@@ -24,12 +24,16 @@ def loser(balance, bet):
     print(f"You lost! New balance: ${balance}")
     return balance
 
-def create_shoe(decks=8):
+def create_shoe(decks = 8):
     """Create a shoe containing multiple decks of 52 cards."""
     shoe = [{'rank': rank, 'suit': suit, 'value': value} 
             for suit in suits for rank, value in ranks.items() for _ in range(decks)]
-    random.shuffle(shoe)
-    return shoe
+    shuffled_shoe = []
+    while shoe:
+        random_index = random.randint(0, len(shoe) - 1)
+        picked_card = shoe.pop(random_index)
+        shuffled_shoe.append(picked_card)
+    return shuffled_shoe
 
 def deal_card(shoe):
     if len(shoe) < 20:
